@@ -71,6 +71,8 @@
     - if description.present?
       %p
         %strong= description
+        = link_to 'Acessar', rails_admin_path
+
 
     %table.table.table-condensed.table-striped
       %thead
@@ -93,6 +95,7 @@
           %tr{class: "#{@abstract_model.param_key}_row #{@model_config.list.with(object: object).row_css_class}"}
             %td
               = check_box_tag "bulk_ids[]", object.id, false
+              = link_to 'Acessar', rails_admin_path
             - if @other_left_link ||= other_left && index_path(params.except('set').merge(params[:set].to_i != 1 ? {set: (params[:set].to_i - 1)} : {}))
               %td.other.left= link_to "...", @other_left_link, class: 'pjax'
             - properties.map{ |property| property.bind(:object, object) }.each do |property|
@@ -101,9 +104,13 @@
             - if @other_right_link ||= other_right && index_path(params.merge(set: (params[:set].to_i + 1)))
               %td.other.right= link_to "...", @other_right_link, class: 'pjax'
             %td.last.links
+            = link_to 'Acessar', rails_admin_path
+
               %ul.inline.list-inline= menu_for :member, @abstract_model, object, true
 
     - if @objects.respond_to?(:total_count)
+    = link_to 'Acessar', rails_admin_path
+
       - total_count = @objects.total_count.to_i
       .row
         .col-md-6= paginate(@objects, theme: 'ra-twitter-bootstrap', remote: true)
